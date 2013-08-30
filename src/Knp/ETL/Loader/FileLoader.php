@@ -18,7 +18,7 @@ class FileLoader implements LoaderInterface
 
     public function load($data, ContextInterface $context)
     {
-        $r = $this->file->fwrite($data);
+        $r = $this->write($data);
 
         if (null !== $this->logger) {
             $this->logger->debug(sprintf('Wrote %s bytes in %s', $r, $this->file->getBasename()));
@@ -31,5 +31,10 @@ class FileLoader implements LoaderInterface
 
     public function clear(ContextInterface $context)
     {
+    }
+
+    protected function write($data)
+    {
+        return $this->file->fwrite($data);
     }
 }
